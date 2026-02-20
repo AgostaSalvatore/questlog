@@ -21,7 +21,7 @@ class QuestController extends Controller
      */
     public function create()
     {
-        //
+        return view('quests.create');
     }
 
     /**
@@ -29,7 +29,16 @@ class QuestController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'title'       => 'required|max:255',
+            'description' => 'nullable',
+            'status'      => 'required|in:pending,in_progress,completed,failed',
+            'priority'    => 'required|in:low,medium,high,urgent',
+        ]);
+
+        Quest::create($validated);
+
+        return redirect()->route('quests.index')->with('success', 'Quest created successfully');
     }
 
     /**

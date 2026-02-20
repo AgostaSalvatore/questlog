@@ -4,13 +4,15 @@
 
 @section('content')
 
-    @foreach ($quests as $quest)
+    @forelse ($quests as $quest)
         <div>
             <h2>{{ $quest->title }}</h2>
             <p>{{ $quest->description }}</p>
-            <p>Stato: {{ $quest->status }}</p>
-            <p>Priorità: {{ $quest->priority }}</p>
+            <p><b>Stato:</b> {{ $quest->status }}</p>
+            <p><b>Priorità:</b> {{ $quest->priority }}</p>
         </div>
-    @endforeach
+    @empty
+        <p>Nessuna quest trovata</p>
+    @endforelse
 
 @endsection

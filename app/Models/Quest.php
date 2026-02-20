@@ -12,4 +12,9 @@ class Quest extends Model
         'status',
         'priority',
     ];
+
+    public function getStatusLabelAttribute()
+    {
+        return ucfirst(str_replace('_', ' ', $this->status));
+    }
 }

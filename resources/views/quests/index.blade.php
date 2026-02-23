@@ -9,7 +9,7 @@
             <h2>{{ $quest->title }}</h2>
             <p>{{ $quest->description }}</p>
             <p><b>Stato:</b> {{ $quest->status_label }}</p>
-            <p><b>Priorità:</b> {{ $quest->priority }}</p>
+            <p><b>Priorità:</b> {{ $quest->priority_first_letter_cap }}</p>
         </div>
     @empty
         <p>Nessuna quest trovata</p>

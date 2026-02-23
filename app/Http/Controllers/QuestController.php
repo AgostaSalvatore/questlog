@@ -60,9 +60,18 @@ class QuestController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Quest $quest)
     {
-        //
+        $validated = $request->validate([
+            'title'       => 'required|max:255',
+            'description' => 'nullable',
+            'status'      => 'required|in:pending,in_progress,completed,failed',
+            'priority'    => 'required|in:low,medium,high,urgent',
+        ]);
+
+        $quest->update($validated);
+
+        return redirect()->route('quests.index')->with('success', 'Quest updated successfully');
     }
 
     /**

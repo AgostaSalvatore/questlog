@@ -38,11 +38,11 @@
 
         <div class="form-group">
             <label for="status">Stato</label>
-            <select name="status" id="status">
-                <option value="pending">In attesa</option>
-                <option value="in_progress">In corso</option>
-                <option value="completed">Completata</option>
-                <option value="failed">Fallita</option>
+            <select name="status" id="status" >
+                <option value="pending" {{ old('status', $quest->status) == 'pending' ? 'selected' : '' }}>In attesa</option>
+                <option value="in_progress" {{ old('status', $quest->status) == 'in_progress' ? 'selected' : '' }}>In corso</option>
+                <option value="completed" {{ old('status', $quest->status) == 'completed' ? 'selected' : '' }}>Completata</option>
+                <option value="failed" {{ old('status', $quest->status) == 'failed' ? 'selected' : '' }}>Fallita</option>
             </select>
         </div>
 

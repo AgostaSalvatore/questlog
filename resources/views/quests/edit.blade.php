@@ -39,23 +39,23 @@
         <div class="form-group">
             <label for="status">Stato</label>
             <select name="status" id="status" >
-                <option value="pending" {{ old('status', $quest->status) == 'pending' ? 'selected' : '' }}>In attesa</option>
-                <option value="in_progress" {{ old('status', $quest->status) == 'in_progress' ? 'selected' : '' }}>In corso</option>
-                <option value="completed" {{ old('status', $quest->status) == 'completed' ? 'selected' : '' }}>Completata</option>
-                <option value="failed" {{ old('status', $quest->status) == 'failed' ? 'selected' : '' }}>Fallita</option>
+                <option value="pending" {{ old('status', $quest->status) == 'pending' ? 'selected' : '' }}>Pending</option>
+                <option value="in_progress" {{ old('status', $quest->status) == 'in_progress' ? 'selected' : '' }}>In Progress</option>
+                <option value="completed" {{ old('status', $quest->status) == 'completed' ? 'selected' : '' }}>Completed</option>
+                <option value="failed" {{ old('status', $quest->status) == 'failed' ? 'selected' : '' }}>Failed</option>
             </select>
         </div>
 
         <div class="form-group">
             <label for="priority">Priorità</label>
             <select name="priority" id="priority">
-                <option value="low">Bassa</option>
-                <option value="medium">Media</option>
-                <option value="high">Alta</option>
-                <option value="urgent">Urgente</option>
+                <option value="low">Low</option>
+                <option value="medium">Medium</option>
+                <option value="high">High</option>
+                <option value="urgent">Urgent</option>
             </select>
         </div>
 
-        <button type="submit">Crea Quest</button>
+        <button type="submit">Modifica Quest</button>
     </form>
 @endsection

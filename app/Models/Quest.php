@@ -18,7 +18,7 @@ class Quest extends Model
         return ucfirst(str_replace('_', ' ', $this->status));
     }
 
-    public function getPriorityFirstLetterCap()
+    public function getPriorityFirstLetterCapAttribute()
     {
         return ucfirst($this->priority);
     }

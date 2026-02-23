@@ -29,13 +29,7 @@ class QuestController extends Controller
      */
     public function store(Request $request)
     {
-        $validated = $request->validate([
-            'title'       => 'required|max:255',
-            'description' => 'nullable',
-            'status'      => 'required|in:pending,in_progress,completed,failed',
-            'priority'    => 'required|in:low,medium,high,urgent',
-        ]);
-
+        $validated = $this->validateQuest($request);
         Quest::create($validated);
 
         return redirect()->route('quests.index')->with('success', 'Quest created successfully');
@@ -62,12 +56,7 @@ class QuestController extends Controller
      */
     public function update(Request $request, Quest $quest)
     {
-        $validated = $request->validate([
-            'title'       => 'required|max:255',
-            'description' => 'nullable',
-            'status'      => 'required|in:pending,in_progress,completed,failed',
-            'priority'    => 'required|in:low,medium,high,urgent',
-        ]);
+        $validated = $this->validateQuest($request);
 
         $quest->update($validated);
 
@@ -80,5 +69,15 @@ class QuestController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    private function validateQuest(Request $request): array
+    {
+        return $request->validate([
+            'title'       => 'required|max:255',
+            'description' => 'nullable',
+            'status'      => 'required|in:pending,in_progress,completed,failed',
+            'priority'    => 'required|in:low,medium,high,urgent',
+        ]);
     }
 }

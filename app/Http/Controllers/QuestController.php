@@ -52,9 +52,9 @@ class QuestController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Quest $quest)
     {
-        //
+        return view('quests.edit', compact('quest'));
     }
 
     /**

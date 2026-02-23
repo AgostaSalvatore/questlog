@@ -1,12 +1,13 @@
 @extends('layouts.app')
 
-@section('title', 'Crea Quest')
+@section('title', 'Modifica Quest')
 
 @section('content')
-    <h1>Crea Quest</h1>
+    <h1>Modifica Quest</h1>
 
-    <form action="{{ route('quests.store') }}" method="POST">
+    <form action="{{ route('quests.update', $quest->id) }}" method="POST">
         @csrf
+        @method('PUT')
         
         <div class="form-group">
             <label for="title">Titolo</label>
@@ -15,7 +16,7 @@
             name="title" 
             id="title" 
             placeholder="Inserisci il titolo della quest"
-            value="{{ old('title') }}"
+            value="{{ old('title', $quest->title) }}"
             required>
             @error('title')
                 <div class="error">{{ $message }}</div>
@@ -29,7 +30,7 @@
             name="description" 
             id="description" 
             placeholder="Breve descrizione"
-            value="{{ old('description') }}">
+            value="{{ old('description', $quest->description) }}">
             @error('description')
                 <div class="error">{{ $message }}</div>
             @enderror

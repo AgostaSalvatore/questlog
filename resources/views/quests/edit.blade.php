@@ -49,10 +49,10 @@
         <div class="form-group">
             <label for="priority">Priorità</label>
             <select name="priority" id="priority">
-                <option value="low">Low</option>
-                <option value="medium">Medium</option>
-                <option value="high">High</option>
-                <option value="urgent">Urgent</option>
+                <option value="low" {{ old('priority', $quest->priority) == 'low' ? 'selected' : '' }}>Low</option>
+                <option value="medium" {{ old('priority', $quest->priority) == 'medium' ? 'selected' : '' }}>Medium</option>
+                <option value="high" {{ old('priority', $quest->priority) == 'high' ? 'selected' : '' }}>High</option>
+                <option value="urgent" {{ old('priority', $quest->priority) == 'urgent' ? 'selected' : '' }}>Urgent</option>
             </select>
         </div>
 

@@ -1,20 +1,24 @@
 @extends('layouts.app')
 
-@section('title', 'Crea Quest')
+@section('title', 'Create Quest')
+
 
 @section('content')
-    <h1>Crea Quest</h1>
+    <h1>Create Quest</h1>
+
 
     <form action="{{ route('quests.store') }}" method="POST">
         @csrf
         
         <div class="form-group">
-            <label for="title">Titolo</label>
+            <label for="title">Title</label>
+
             <input 
             type="text" 
             name="title" 
             id="title" 
-            placeholder="Inserisci il titolo della quest"
+            placeholder="Enter quest title"
+
             value="{{ old('title') }}"
             required>
             @error('title')
@@ -38,23 +42,27 @@
         <div class="form-group">
             <label for="status">Stato</label>
             <select name="status" id="status">
-                <option value="pending">In attesa</option>
-                <option value="in_progress">In corso</option>
-                <option value="completed">Completata</option>
-                <option value="failed">Fallita</option>
+                <option value="pending" {{ old('status', 'pending') == 'pending' ? 'selected' : '' }}>Pending</option>
+                <option value="in_progress" {{ old('status') == 'in_progress' ? 'selected' : '' }}>In Progress</option>
+                <option value="completed" {{ old('status') == 'completed' ? 'selected' : '' }}>Completed</option>
+                <option value="failed" {{ old('status') == 'failed' ? 'selected' : '' }}>Failed</option>
+
             </select>
         </div>
 
         <div class="form-group">
-            <label for="priority">Priorità</label>
+            <label for="priority">Priority</label>
+
             <select name="priority" id="priority">
-                <option value="low">Bassa</option>
-                <option value="medium">Media</option>
-                <option value="high">Alta</option>
-                <option value="urgent">Urgente</option>
+                <option value="low" {{ old('priority') == 'low' ? 'selected' : '' }}>Low</option>
+                <option value="medium" {{ old('priority', 'medium') == 'medium' ? 'selected' : '' }}>Medium</option>
+                <option value="high" {{ old('priority') == 'high' ? 'selected' : '' }}>High</option>
+                <option value="urgent" {{ old('priority') == 'urgent' ? 'selected' : '' }}>Urgent</option>
+
             </select>
         </div>
 
         <button type="submit">Crea Quest</button>
+
     </form>
 @endsection

@@ -38,9 +38,9 @@ class QuestController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Quest $quest)
     {
-        //
+        return view('quests.show', compact('quest'));
     }
 
     /**
@@ -66,9 +66,11 @@ class QuestController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Quest $quest)
     {
-        //
+        $quest->delete();
+
+        return redirect()->route('quests.index')->with('success', 'Quest deleted successfully');
     }
 
     private function validateQuest(Request $request): array

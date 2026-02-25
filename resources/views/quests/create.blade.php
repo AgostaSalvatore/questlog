@@ -7,7 +7,7 @@
     <h1>Create Quest</h1>
 
 
-    <form action="{{ route('quests.store') }}" method="POST">
+    <form action="{{ route('quests.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
         
         <div class="form-group">
@@ -60,6 +60,11 @@
                 <option value="urgent" {{ old('priority') == 'urgent' ? 'selected' : '' }}>Urgent</option>
 
             </select>
+        </div>
+
+        <div class="form-group">
+            <label for="image_path">Image</label>
+            <input type="file" name="image" id="image_path">
         </div>
 
         <button type="submit">Crea Quest</button>

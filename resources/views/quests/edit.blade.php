@@ -5,7 +5,7 @@
 @section('content')
     <h1>Modifica Quest</h1>
 
-    <form action="{{ route('quests.update', $quest->id) }}" method="POST">
+    <form action="{{ route('quests.update', $quest->id) }}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('PUT')
         
@@ -54,6 +54,11 @@
                 <option value="high" {{ old('priority', $quest->priority) == 'high' ? 'selected' : '' }}>High</option>
                 <option value="urgent" {{ old('priority', $quest->priority) == 'urgent' ? 'selected' : '' }}>Urgent</option>
             </select>
+        </div>
+
+        <div class="form-group">
+            <label for="image_path">Image</label>
+            <input type="file" name="image" id="image_path">
         </div>
 
         <button type="submit">Modifica Quest</button>

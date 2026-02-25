@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Quest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class QuestController extends Controller
 {
@@ -30,6 +31,11 @@ class QuestController extends Controller
     public function store(Request $request)
     {
         $validated = $this->validateQuest($request);
+
+        if ($request->hasFile('image')) {
+            $path                    = $request->file('image')->store('quests', 'public');
+            $validated['image_path'] = $path;
+        }
         Quest::create($validated);
 
         return redirect()->route('quests.index')->with('success', 'Quest created successfully');
@@ -58,6 +64,13 @@ class QuestController extends Controller
     {
         $validated = $this->validateQuest($request);
 
+        if ($request->hasFile('image')) {
+            if ($quest->image_path) {
+                Storage::disk('public')->delete($quest->image_path);
+            }
+            $path                    = $request->file('image')->store('quests', 'public');
+            $validated['image_path'] = $path;
+        }
         $quest->update($validated);
 
         return redirect()->route('quests.index')->with('success', 'Quest updated successfully');
@@ -80,6 +93,7 @@ class QuestController extends Controller
             'description' => 'nullable',
             'status'      => 'required|in:pending,in_progress,completed,failed',
             'priority'    => 'required|in:low,medium,high,urgent',
+            'image'       => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
     }
 }

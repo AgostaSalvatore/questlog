@@ -11,6 +11,7 @@ class Quest extends Model
         'description',
         'status',
         'priority',
+        'image_path',
     ];
 
     public function getStatusLabelAttribute()

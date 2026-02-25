@@ -58,6 +58,15 @@
 
         <div class="form-group">
             <label for="image_path">Image</label>
+            @if ($quest->image_path)
+                <div style="margin-bottom: 8px;">
+                    <img src="{{ Storage::url($quest->image_path) }}" alt="Immagine attuale" style="max-width: 240px; height: auto; display: block;">
+                </div>
+                <label style="display: inline-flex; gap: 6px; align-items: center; margin-bottom: 8px;">
+                    <input type="checkbox" name="remove_image" value="1" {{ old('remove_image') ? 'checked' : '' }}>
+                    Elimina immagine corrente
+                </label>
+            @endif
             <input type="file" name="image" id="image_path">
         </div>
 

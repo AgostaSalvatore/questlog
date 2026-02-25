@@ -62,7 +62,15 @@ class QuestController extends Controller
      */
     public function update(Request $request, Quest $quest)
     {
-        $validated = $this->validateQuest($request);
+        $validated   = $this->validateQuest($request);
+        $removeImage = $request->boolean('remove_image');
+
+        unset($validated['remove_image']);
+
+        if ($removeImage && !$request->hasFile('image') && $quest->image_path) {
+            Storage::disk('public')->delete($quest->image_path);
+            $validated['image_path'] = null;
+        }
 
         if ($request->hasFile('image')) {
             if ($quest->image_path) {
@@ -89,11 +97,12 @@ class QuestController extends Controller
     private function validateQuest(Request $request): array
     {
         return $request->validate([
-            'title'       => 'required|max:255',
-            'description' => 'nullable',
-            'status'      => 'required|in:pending,in_progress,completed,failed',
-            'priority'    => 'required|in:low,medium,high,urgent',
-            'image'       => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'title'        => 'required|max:255',
+            'description'  => 'nullable',
+            'status'       => 'required|in:pending,in_progress,completed,failed',
+            'priority'     => 'required|in:low,medium,high,urgent',
+            'image'        => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'remove_image' => 'nullable|boolean',
         ]);
     }
 }

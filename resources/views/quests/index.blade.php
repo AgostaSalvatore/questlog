@@ -12,6 +12,9 @@
 
     @forelse ($quests as $quest)
         <div style="border: 1px solid #e5e7eb; border-radius: 8px; padding: 12px; margin-bottom: 12px;">
+            @if ($quest->image_path)
+                <img src="{{ Storage::url($quest->image_path) }}" alt="Quest Image" style="max-width: 100%; height: auto;">
+            @endif
             <h2>{{ $quest->title }}</h2>
             <p>{{ $quest->description }}</p>
             <p><b>Stato:</b> {{ $quest->status_label }}</p>
